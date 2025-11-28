@@ -19,6 +19,7 @@ export default function createPlayer(container) {
         font_scale: 5,
         show_video: false,
         thumbnail_size: 200,
+        use_webcam: false,
     }
 
     video.addEventListener("loadeddata", () => {

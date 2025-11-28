@@ -39,5 +39,20 @@ gui.add(player.options, 'sample_size', 2, 20, 1)
 gui.add(player.options, 'brightness_boost', -1, 1, 0.01)
 gui.add(player.options, 'characters')
 gui.addColor(player.options, 'bg_color')
+gui.add(player.options, 'use_webcam').onFinishChange(v => {
+    if (v) {
+        navigator.mediaDevices.getUserMedia({
+            video: true,
+            audio: false,
+        }).then(stream => {
+            player.video.srcObject = stream
+            player.video.onloadedmetadata = function (e) {
+                player.video.play()
+            }
+        })
+    } else {
+        player.video.srcObject = null
+    }
+})
 
 gui.close()
